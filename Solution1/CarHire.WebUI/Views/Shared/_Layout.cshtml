@@ -9,10 +9,21 @@
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
     <title>@ViewBag.Title</title>
+    <style>
+        .navbar-right{
+            float: right !important;
+            margin-right: 15px;
+            margin-left: 15px;
+        }
+    </style>
 </head>
 <body>
     <div class="navbar navbar-inverse" role="navigation">
-        <a class="navbar-brand" href="~/">Wypożyczalnia samochodowa</a>
+        <a class="navbar-brand" href="~/">
+        <span class="hidden-xs">Wypożyczalnia samochodowa</span>
+        <div class="visible-xs">Wypożyczalnia</div>
+        <div class="visible-xs">samochodowa</div>
+        </a>
           @if (Session["LogedUserID"] != null)
         {
             @Html.ActionLink("Wyloguj", "Logout", "Home", null, new { @class = "pull-right label label-danger" })
