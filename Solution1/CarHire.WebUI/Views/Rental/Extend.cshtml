@@ -1,0 +1,28 @@
+﻿@model CarHire.Domain.Entities.Rental
+
+@{
+    ViewBag.Title = "Extend";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="panel">
+    <div>
+        <p><label>Data przedłużenia:</label></p>
+    </div>
+    @using (Html.BeginForm("Extend", "Rental"))
+    {
+        @Html.EditorFor(m => m.RentalId);
+        @Html.EditorFor(m => m.CarId);
+        @Html.EditorFor(m => m.UserId);
+        <div>
+            @Html.EditorFor(m => m.Extension)
+        </div>
+
+        <div class="panel-footer">
+            <input type="submit" value="Zapisz" class="btn btn-primary">
+            @Html.ActionLink("Anuluj", "Index", "Home", null, new
+{
+    @class = "btn btn-default"
+})
+        </div>
+    }
+    </div>

@@ -1,0 +1,44 @@
+﻿@model  IEnumerable<CarHire.WebUI.Models.RentalViewAggregator>
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    @if (Session["Category"]== null)
+    {
+        <text>
+            Wypożyczalnia samochodów oferuje tanie i wysokiej jakości usługę wynajmu samochodów.
+            Wypożyczalnia działa na terenie polski południowej -w Krakowie, Katowicach, Rzeszowie, Wrocławiu i innych
+            miastach, podstawiamy samochody na lotniska i w miejsca ustalone przez klienta.Nasza wypożyczalnia aut oferuje Państwu
+            krótko i długoterminowy wynajem bezpiecznych i wygodnych pojazdów osobowych. Naszym priorytetem jest wypożyczanie samochodów z
+            zachowaniem wysokiej jakości usług przy możliwie najniższej cenie!
+        </text>
+    }
+    else if (Session["Category"].Equals("Klient"))
+    {
+        int x=0;
+        foreach (var item in Model)
+        {
+            if (x == 0)
+            {
+                <H1>Witaj, @item.User.Name  @item.User.Surname !</H1>
+                <h3>Twoje wnioski oczekujące na akceptacje:</h3>
+                x = 1;
+            }
+            if (item.Rental.Status == "Oczekujacy")
+            {
+                <h5>@item.Rental.ReturnDate.ToString("d")  @item.Car.Brand @item.Car.Model</h5>
+
+            }
+        }
+
+    }
+    else if (Session["Category"].Equals("Kierownik"))
+    {
+        <h3>Jesteś zalogowany jako kierownik tej firmy</h3>
+    }
+    else if (Session["Category"].Equals("Pracownik"))
+    {
+        <h3>Jesteś zalogowany jako pracownik wyporzyczalni</h3>
+        }
+</div>

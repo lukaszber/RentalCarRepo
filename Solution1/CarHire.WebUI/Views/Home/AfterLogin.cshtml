@@ -1,0 +1,21 @@
+﻿@model CarHire.WebUI.Users
+
+@{
+    ViewBag.Title = "AfterLogin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AfterLogin</h2>
+
+<div>
+    @if (Session["LogedUserFullname"] != null)
+    {   
+        
+        <text>
+            Welcome @Model.Name
+        </text>
+    }
+    <br />
+
+    @Html.ActionLink("Wyloguj", "Login")
+</div>

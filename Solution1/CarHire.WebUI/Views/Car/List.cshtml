@@ -1,0 +1,13 @@
+﻿@model CarHire.WebUI.Models.CarsListViewModel
+
+@{
+    ViewBag.Title = "Samochody";
+}
+
+@foreach (var p in Model.Cars)
+{
+    @Html.Partial("CarSummary", p);
+}
+<div class="btn-group pull-right">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x }))
+</div>

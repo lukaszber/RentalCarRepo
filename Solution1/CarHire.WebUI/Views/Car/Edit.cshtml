@@ -1,0 +1,24 @@
+﻿@model CarHire.Domain.Entities.Car
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        <h3>Edycja @Model.Brand @Model.Model</h3>
+    </div>
+
+    @using (Html.BeginForm("Edit", "Car"))
+    {
+        @Html.EditorForModel();
+        <div class="panel-footer">
+            <input type="submit" value="Zapisz" class="btn btn-primary" />
+            @Html.ActionLink("Anuluj i wróć do listy", "Holder", null, new
+       {
+           @class = "btn btn-default"
+       })
+        </div>
+    }
+</div>

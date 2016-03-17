@@ -1,0 +1,27 @@
+﻿@model CarHire.Domain.Entities.Car
+
+<div class="well">
+
+<h3><p><strong>@Model.Brand @Model.Model</strong></p></h3>
+<h3>
+    @if (Model.Hired == true)
+    {
+        <span class="pull-right label label-danger">Wypożyczony</span>
+    }
+    else
+    {
+        if (Session["LogedUserID"] != null)
+        {
+            @Html.ActionLink("Wypożycz", "Create", "Rental", new { carId = Model.CarID }, new { @class = "pull-right btn btn-default btn-xs" })
+        }
+        else
+        {
+            @Html.ActionLink("Wypożycz", "Login", "Home", new { carId = Model.CarID }, new { @class = "pull-right btn btn-default btn-xs" })
+        }<br />
+        <span class="pull-right label label-success">Dostępny</span>
+
+    }
+</h3>
+<p><span class="info">Cena: @Model.PricePerDay.ToString("c") Rok produkcji: @Model.Year r. Przebieg: @Model.Mileage Pojemność: @Model.Capacity</span></p>
+
+ </div>
