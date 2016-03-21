@@ -1,2 +1,2 @@
 # RentalCarRepo
-Projekt wyporzyczalni samochodowej
+Projekt wypożyczalni samochodowej
