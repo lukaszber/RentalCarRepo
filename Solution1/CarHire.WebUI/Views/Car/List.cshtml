@@ -4,10 +4,21 @@
     ViewBag.Title = "Samochody";
 }
 
+@using (Html.BeginForm())
+{
+        <div>Model: </div>
+        <div>@Html.TextBox("NameSearch")</div>
+        <div>Marka: </div>
+        <div>@Html.TextBox("BrandSearch")</div>
+        <input type="submit" value="Szukaj" />
+}
+
+<br />
 @foreach (var p in Model.Cars)
 {
     @Html.Partial("CarSummary", p);
 }
+
 <div class="btn-group pull-right">
     @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x }))
 </div>
