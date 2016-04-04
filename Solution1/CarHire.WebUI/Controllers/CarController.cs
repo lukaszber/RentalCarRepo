@@ -17,14 +17,38 @@ namespace CarHire.WebUI.Controllers
         {
             this.repository = carRepository;
         }
-        public ViewResult List(int page = 1)
+        public ViewResult List(CarSearch searchModel, int page = 1)
         {
+            IEnumerable < Car > cars = repository.Cars;
+            if (ModelState.IsValid)
+            {
+                if (searchModel.NameSearch != null && searchModel.BrandSearch != null)
+                {
+                    cars = from i in repository.Cars
+                           where i.Model.Contains(searchModel.NameSearch) && i.Brand.Contains(searchModel.BrandSearch)
+                           select i;
+                }
+                else if (searchModel.NameSearch != null)
+                {
+                    cars = from i in repository.Cars
+                           where i.Model.Contains(searchModel.NameSearch)
+                           select i;
+                }
+                else if (searchModel.BrandSearch != null)
+                {
+                    cars = from i in repository.Cars
+                           where i.Brand.Contains(searchModel.BrandSearch)
+                           select i;
+                }
+            }
+
+            cars = cars.OrderBy(p => p.CarID);
+            cars = cars.Skip((page - 1) * PageSize);
+            cars = cars.Take(PageSize);
+
             CarsListViewModel model = new CarsListViewModel
             {
-                Cars = repository.Cars
-                .OrderBy(p => p.CarID)
-                .Skip((page - 1) * PageSize)
-                .Take(PageSize),
+                Cars = cars,
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,

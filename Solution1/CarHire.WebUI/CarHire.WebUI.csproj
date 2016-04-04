@@ -119,10 +119,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\CarHire.mdf" />
-    <Content Include="App_Data\CarHire_log.ldf">
-      <DependentUpon>CarHire.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -191,6 +187,7 @@
     </Compile>
     <Compile Include="HtmlHelpers\PagingHelper.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Models\CarSearch.cs" />
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\CarsListViewModel.cs" />
     <Compile Include="Models\RentalListViewModel.cs" />
@@ -278,6 +275,9 @@
       <Project>{8ff2ecaa-806d-4b4b-97ef-5f615fceefc8}</Project>
       <Name>CarHire.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
