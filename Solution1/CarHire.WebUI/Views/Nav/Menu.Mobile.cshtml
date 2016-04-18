@@ -1,18 +1,14 @@
 ﻿@if (Session["Category"] == null)
 {
-    <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
-            drop
-            <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-            <li><a href="#">HTML</a></li>
-            <li><a href="#">CSS</a></li>
-            <li><a href="#">JavaScript</a></li>
-            <li>@Html.ActionLink("Strona główna", "Index", "Home", null, new { @class = "btn btn-block btn-default btn-lg" })</li>
-            <li> @Html.ActionLink("Wypożycz", "List", "Car", null, new { @class = "btn btn-block btn-default btn-lg" })</li>
-        </ul>
-    </div>
+    <nav>
+        <div class="dropdown">
+            <button class="btn" data-toggle="dropdown"> drop </button>
+            <ul class="dropdown-menu">
+                <li>@Html.ActionLink("Strona główna", "Index", "Home", null)</li>
+                <li> @Html.ActionLink("Wypożycz", "List", "Car", null)</li>
+            </ul>
+        </div>
+    </nav>
 }
 else if (Session["Category"].Equals("Kierownik"))
 {

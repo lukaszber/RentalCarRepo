@@ -12,7 +12,7 @@
             <tr>
                 <th class="text-center">Nr.</th>
                 <th class="text-center">Kto wypożyczał</th>
-                <th class="text-center">wypożyczone auto</th>
+                <th class="text-center">Wypożyczone auto</th>
                 <th class="text-center">Data wypożyczenia</th>
                 <th class="text-center">Data Zwrotu</th>
                 <th class="text-center">Koszt wypożyczenia</th>
@@ -25,8 +25,10 @@
                 int s;
                 decimal price = 0;
             }
-            @foreach (var item in Model)
+            @if (Session["Category"].Equals("Kierownik") || Session["Category"].Equals("Pracownik"))
             {
+                foreach (var item in Model)
+                {
                 <tr>
                     <td class="text-center">@x</td>
                     @{ 
@@ -55,7 +57,8 @@
                         }
                 </td>
                 </tr>
-            }
+                        }
+
             <th></th>
             <th></th>
             <th></th>
@@ -63,5 +66,44 @@
             <th></th>
             <th class="text-center">@y</th>
             <th></th>
+                        }
+                        else if (Session["Category"].Equals("Klient"))
+                        {
+                            foreach (var item in Model)
+                            {
+
+                                if (item.User.UserID.Equals(Session["LogedUserID"]))
+                                {
+                                <tr>
+                                    <td class="text-center">@x</td>
+                                    @{
+                                        x++;
+                                    }
+
+                                    <td class="text-center">@item.User.Name @item.User.Surname</td>
+                                    <td class="text-center">@item.Car.Brand @item.Car.Model</td>
+                                    <td class="text-center">@item.Rental.RentalDate.ToString("d")</td>
+                                    <td class="text-center">@item.Rental.ReturnDate.ToString("d")</td>
+                                    @{
+                                        s = item.Rental.ReturnDate.Day - item.Rental.RentalDate.Day;
+                                        y = y + item.Car.PricePerDay * s;
+                                        price = item.Car.PricePerDay * s;
+                                    }
+                                    <td class="text-center">@price.ToString("c")</td>
+
+
+                                    <td class="text-center">
+                                        @if (item.Rental.Status.Equals("Wypozyczony"))
+                                        {
+                                            using (Html.BeginForm("Extend", "Users"))
+                                            {
+                                                @Html.ActionLink("Przedłuż wypożyczenie", "Extend", new { rentalId = item.Rental.RentalId }, new { @class = "btn btn-default btn-xs" })
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                                        }
+                                        }
+                                        }
         </table>
     </div>
