@@ -3,6 +3,24 @@
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<SelectListItem> list = new List<SelectListItem>();
+    SelectListItem add = new SelectListItem() {Text = "AM", Value= "AM" };
+    list.Add(add);
+    add = new SelectListItem() { Text = "A1", Value = "A1" };
+    list.Add(add);
+    add = new SelectListItem() { Text = "A2", Value = "A2" };
+    list.Add(add);
+    add = new SelectListItem() { Text = "A", Value = "A" };
+    list.Add(add);
+    add = new SelectListItem() { Text = "B", Value = "B" };
+    list.Add(add);
+    add = new SelectListItem() { Text = "B+E", Value = "B+E" };
+    list.Add(add);
+    add = new SelectListItem() { Text = "B1", Value = "B1" };
+    list.Add(add);
+    add = new SelectListItem() { Text = "C", Value = "C" };
+    list.Add(add);
 }
 
 <div class="panel">
@@ -12,8 +30,43 @@
 
     @using (Html.BeginForm("Edit", "Car"))
     {
-        @Html.EditorForModel();
-        <div class="panel-footer">
+        @Html.ValidationSummary()
+        <div class="form-group">
+            <label>Marka:</label><p></p>
+            @Html.EditorFor(x => x.Brand)
+        </div>
+        <div class="form-group">
+            <label>Model:</label><p></p>
+            @Html.EditorFor(x => x.Model)
+        </div>
+        <div class="form-group">
+            <label>Przebieg:</label><p></p>
+            @Html.EditorFor(x => x.Mileage)
+        </div>
+        <div class="form-group">
+            <label>Nr. Rejestracyjny:</label><p></p>
+            @Html.EditorFor(x => x.RegistrationNumber)
+        </div>
+        <div class="form-group">
+            <label>Cena za dzień:</label><p></p>
+            @Html.EditorFor(x => x.PricePerDay)
+        </div>
+        <div class="form-group">
+            <label>Rocznik:</label><p></p>
+            @Html.EditorFor(x => x.Year)
+        </div>
+
+                <div class="form-group">
+                    <label>Pojemność:</label><p></p>
+                    @Html.EditorFor(x => x.Capacity)
+                </div>
+
+                <div class="form-group">
+                    <label>Kategoria:</label><p></p>
+                    @Html.DropDownListFor(m => m.Category, list)
+                </div>
+
+             <div class="panel-footer">
             <input type="submit" value="Zapisz" class="btn btn-primary" />
             @Html.ActionLink("Anuluj i wróć do listy", "Holder", null, new
        {
