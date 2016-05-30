@@ -66,12 +66,12 @@ namespace CarHire.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (CarHireEntities2 dc = new CarHireEntities2())
+                using (EfDbContext dc = new EfDbContext())
                 {
                     var v = dc.Users.Where(a => a.Username.Equals(u.Username) && a.Password.Equals(u.Password)).FirstOrDefault();
                     if (v != null)
                     {
-                        Session["LogedUserID"] = v.UserId;
+                        Session["LogedUserID"] = v.UserID;
                         Session["LogedUserFullname"] = v.Name.ToString();
                         Session["Category"] = v.Category.ToString();
                         return RedirectToAction("Index");
