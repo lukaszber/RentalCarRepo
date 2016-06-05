@@ -34,19 +34,22 @@ namespace CarHire.WebUI.Controllers
                     searchModel.MaxMileage = decimal.MaxValue;
                 if (searchModel.MaxCapacity == 0)
                     searchModel.MaxCapacity = decimal.MaxValue;
+                if (searchModel.Category == null)
+                    searchModel.Category = "";
                 cars = from i in repository.Cars
-                       where
-                           i.Model.Contains(searchModel.NameSearch) &&
-                           i.Brand.Contains(searchModel.BrandSearch) &&
-                           i.PricePerDay >= searchModel.MinPrice &&
-                           i.PricePerDay <= searchModel.MaxPrice &&
-                           i.Mileage >= searchModel.MinMileage &&
-                           i.Mileage <= searchModel.MaxMileage &&
-                           i.Year >= searchModel.MinYear&&
-                           i.Year <= searchModel.MaxYear &&
-                           i.Capacity >= searchModel.MinCapacity &&
-                           i.Capacity <= searchModel.MaxCapacity
-                       select i;
+                    where
+                        i.Model.Contains(searchModel.NameSearch) &&
+                        i.Brand.Contains(searchModel.BrandSearch) &&
+                        i.PricePerDay >= searchModel.MinPrice &&
+                        i.PricePerDay <= searchModel.MaxPrice &&
+                        i.Mileage >= searchModel.MinMileage &&
+                        i.Mileage <= searchModel.MaxMileage &&
+                        i.Year >= searchModel.MinYear&&
+                        i.Year <= searchModel.MaxYear &&
+                        i.Capacity >= searchModel.MinCapacity &&
+                        i.Capacity <= searchModel.MaxCapacity &&
+                        i.Category.Contains(searchModel.Category)
+                    select i;
 
                 if (searchModel.Hired == "false")
                     cars = cars.Where(p => p.Hired == true);
