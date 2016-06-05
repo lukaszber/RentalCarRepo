@@ -19,27 +19,39 @@ namespace CarHire.WebUI.Controllers
         }
         public ViewResult List(CarSearch searchModel, int page = 1)
         {
-            IEnumerable < Car > cars = repository.Cars;
+            IEnumerable <Car> cars = repository.Cars;
             if (ModelState.IsValid)
             {
-                if (searchModel.NameSearch != null && searchModel.BrandSearch != null)
-                {
-                    cars = from i in repository.Cars
-                           where i.Model.Contains(searchModel.NameSearch) && i.Brand.Contains(searchModel.BrandSearch)
-                           select i;
-                }
-                else if (searchModel.NameSearch != null)
-                {
-                    cars = from i in repository.Cars
-                           where i.Model.Contains(searchModel.NameSearch)
-                           select i;
-                }
-                else if (searchModel.BrandSearch != null)
-                {
-                    cars = from i in repository.Cars
-                           where i.Brand.Contains(searchModel.BrandSearch)
-                           select i;
-                }
+                if (searchModel.NameSearch == null)
+                    searchModel.NameSearch = "";
+                if (searchModel.BrandSearch == null)
+                    searchModel.BrandSearch = "";
+                if (searchModel.MaxPrice == 0)
+                    searchModel.MaxPrice = decimal.MaxValue;
+                if (searchModel.MaxYear == 0)
+                    searchModel.MaxYear = int.MaxValue;
+                if (searchModel.MaxMileage == 0)
+                    searchModel.MaxMileage = decimal.MaxValue;
+                if (searchModel.MaxCapacity == 0)
+                    searchModel.MaxCapacity = decimal.MaxValue;
+                cars = from i in repository.Cars
+                       where
+                           i.Model.Contains(searchModel.NameSearch) &&
+                           i.Brand.Contains(searchModel.BrandSearch) &&
+                           i.PricePerDay >= searchModel.MinPrice &&
+                           i.PricePerDay <= searchModel.MaxPrice &&
+                           i.Mileage >= searchModel.MinMileage &&
+                           i.Mileage <= searchModel.MaxMileage &&
+                           i.Year >= searchModel.MinYear&&
+                           i.Year <= searchModel.MaxYear &&
+                           i.Capacity >= searchModel.MinCapacity &&
+                           i.Capacity <= searchModel.MaxCapacity
+                       select i;
+
+                if (searchModel.Hired == "false")
+                    cars = cars.Where(p => p.Hired == true);
+                else if (searchModel.Hired == "true")
+                    cars = cars.Where(p => p.Hired == false);
             }
 
             cars = cars.OrderBy(p => p.CarID);
@@ -107,5 +119,16 @@ namespace CarHire.WebUI.Controllers
                 return RedirectToAction("Index", "Home");
             }
          }
+
+        public ViewResult Search()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Search(CarSearch searchModel)
+        {
+            return RedirectToAction("List", searchModel);
+        }
     }
 }
