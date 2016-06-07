@@ -6,11 +6,14 @@
 
 @using (Html.BeginForm())
 {
-        <div>Model: </div>
-        <div>@Html.TextBox("NameSearch")</div>
-        <div>Marka: </div>
-        <div>@Html.TextBox("BrandSearch")</div>
-        <input type="submit" value="Szukaj" />
+    <h3>Wyszukiwanie</h3>
+    <div>Model: 
+    <div>@Html.TextBox("NameSearch")</div></div>
+    <div>Marka: 
+    <div>@Html.TextBox("BrandSearch")</div></div>
+    @Html.CheckBox("Hired", (Request.Form["Hired"] ?? string.Empty).Contains("true")) <text>Tylko dostepne samochody</text> <br />
+    <input type="submit" value="Szukaj" />
+    <br/><br/>@Html.ActionLink("Wyszukiwanie zaawansowane", "Search");
 }
 
 <br />

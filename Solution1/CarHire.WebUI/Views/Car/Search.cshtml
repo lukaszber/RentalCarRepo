@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Wyszukiwanie zaawansowane</h2><br />
+
+@using (Html.BeginForm())
+{
+    <div><b>Model</b></div>
+    <div>
+        <input type="text" name="NameSearch">
+    </div>
+    <div><b>Marka</b></div>
+    <div>
+        <input type="text" name="BrandSearch">
+    </div>
+    <div><b>Cena (zł/dzień)</b></div>
+    <div>
+        Od: <input type="number" name="MinPrice">
+        Do: <input type="number" name="MaxPrice">
+    </div>
+    <div><b>Rok Produkcji</b></div>
+    <div>
+        Od: <input type="number" name="MinYear">
+        Do: <input type="number" name="MaxYear">
+    </div>
+    <div><b>Przebieg (km)</b></div>
+    <div>
+        Od: <input type="number" name="MinMileage">
+        Do: <input type="number" name="MaxMileage">
+    </div>
+    <div><b>Pojemność (l)</b></div>
+        <div>
+            Od: <input type="number" step="0.1" name="MinCapacity">
+            Do: <input type="number" step="0.1" name="MaxCapacity">
+        </div>
+    <div><b>Szukaj tylko</b></div>
+    <div>
+        <input type="radio" name="Hired" value="false">Dostepnych<br>
+        <input type="radio" name="Hired" value="true">Wypożyczonych<br>
+    </div>
+
+    <input type="submit" value="Szukaj" />
+}
+
+<div>
+    <br /><br/>@Html.ActionLink("Anuluj i wróć do listy", "List")
+</div>
