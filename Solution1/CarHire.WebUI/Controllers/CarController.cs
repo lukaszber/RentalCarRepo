@@ -55,9 +55,34 @@ namespace CarHire.WebUI.Controllers
                     cars = cars.Where(p => p.Hired == true);
                 else if (searchModel.Hired == "true")
                     cars = cars.Where(p => p.Hired == false);
-            }
 
-            cars = cars.OrderBy(p => p.CarID);
+                if (searchModel.Sort == "ModelUp")
+                    cars = cars.OrderBy(p => p.Model);
+                else if (searchModel.Sort == "ModelDown")
+                    cars = cars.OrderByDescending(p => p.Model);
+                else if (searchModel.Sort == "BrandUp")
+                    cars = cars.OrderBy(p => p.Brand);
+                else if (searchModel.Sort == "BrandDown")
+                    cars = cars.OrderByDescending(p => p.Brand);
+                else if (searchModel.Sort == "PriceUp")
+                    cars = cars.OrderBy(p => p.PricePerDay);
+                else if (searchModel.Sort == "PriceDown")
+                    cars = cars.OrderByDescending(p => p.PricePerDay);
+                else if (searchModel.Sort == "YearUp")
+                    cars = cars.OrderBy(p => p.Year);
+                else if (searchModel.Sort == "YearDown")
+                    cars = cars.OrderByDescending(p => p.Year);
+                else if (searchModel.Sort == "MileageUp")
+                    cars = cars.OrderBy(p => p.Mileage);
+                else if (searchModel.Sort == "MileageDown")
+                    cars = cars.OrderByDescending(p => p.Mileage);
+                else if (searchModel.Sort == "CapacityUp")
+                    cars = cars.OrderBy(p => p.Capacity);
+                else if (searchModel.Sort == "CapacityDown")
+                    cars = cars.OrderByDescending(p => p.Capacity);
+                else
+                    cars = cars.OrderBy(p => p.CarID);
+            }
             cars = cars.Skip((page - 1) * PageSize);
             cars = cars.Take(PageSize);
 

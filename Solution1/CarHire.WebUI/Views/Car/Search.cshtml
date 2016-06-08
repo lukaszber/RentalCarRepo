@@ -25,53 +25,76 @@
 
 @using (Html.BeginForm())
 {
-    <div><b>Model</b></div>
-    <div>
-        <input type="text" name="NameSearch">
-    </div>
-    <div><b>Marka</b></div>
-    <div>
-        <input type="text" name="BrandSearch">
-    </div>
-    <div><b>Cena (zł/dzień)</b></div>
-    <div>
-        Od: <input type="number" name="MinPrice">
-        Do: <input type="number" name="MaxPrice">
-    </div>
-    <div><b>Rok Produkcji</b></div>
-    <div>
-        Od: <input type="number" name="MinYear">
-        Do: <input type="number" name="MaxYear">
-    </div>
-    <div><b>Przebieg (km)</b></div>
-    <div>
-        Od: <input type="number" name="MinMileage">
-        Do: <input type="number" name="MaxMileage">
-    </div>
-    <div><b>Pojemność (l)</b></div>
-        <div>
-            Od: <input type="number" step="0.1" name="MinCapacity">
-            Do: <input type="number" step="0.1" name="MaxCapacity">
+    <div class="row">
+        <div class="col-md-6">
+            <div><b>Model</b></div>
+            <div>
+                <input type="text" name="NameSearch">
+            </div>
+            <div><b>Marka</b></div>
+            <div>
+                <input type="text" name="BrandSearch">
+            </div>
+            <div><b>Cena (zł/dzień)</b></div>
+            <div>
+                Od: <input type="number" name="MinPrice">
+                Do: <input type="number" name="MaxPrice">
+            </div>
+            <div><b>Rok Produkcji</b></div>
+            <div>
+                Od: <input type="number" name="MinYear">
+                Do: <input type="number" name="MaxYear">
+            </div>
+            <div><b>Przebieg (km)</b></div>
+            <div>
+                Od: <input type="number" name="MinMileage">
+                Do: <input type="number" name="MaxMileage">
+            </div>
+            <div><b>Pojemność (l)</b></div>
+            <div>
+                Od: <input type="number" step="0.1" name="MinCapacity">
+                Do: <input type="number" step="0.1" name="MaxCapacity">
+            </div>
+            <div><b>Kategoria</b></div>
+            <div>
+                <select name="Category">
+                    <option value=""></option>
+                    <option value="A1">A1</option>
+                    <option value="A2">A2</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="B+E">B+E</option>
+                    <option value="B1">B1</option>
+                    <option value="C">C</option>
+                </select>
+            </div>
+            <div><b>Szukaj tylko</b></div>
+            <div>
+                <input type="radio" name="Hired" value="true">Dostepnych<br>
+                <input type="radio" name="Hired" value="false">Wypożyczonych<br>
+            </div>
+            <input type="submit" value="Szukaj" />
         </div>
-    <div><b>Kategoria</b></div>
-        <div>
-            <select name="Category">
+        <div class="col-md-4">
+            <h3>Sortowanie</h3>
+            <b>Sortuj według:</b> <br/>
+            <select name="Sort">
                 <option value=""></option>
-                <option value="A1">A1</option>
-                <option value="A2">A2</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="B+E">B+E</option>
-                <option value="B1">B1</option>
-                <option value="C">C</option>
-             </select>
+                <option value="ModelUp">Model - Rosnąco</option>
+                <option value="ModelDown">Model - Malejąco</option>
+                <option value="BrandUp">Marka - Rosnąco</option>
+                <option value="BrandDown">Marka - Malejąco</option>
+                <option value="PriceUp">Cena - Rosnąco</option>
+                <option value="PriceDown">Cena - Malejąco</option>
+                <option value="YearUp">Rok produkcji - Rosnąco</option>
+                <option value="YearDown">Rok produkcji - Malejąco</option>
+                <option value="MileageUp">Przebieg - Rosnąco</option>
+                <option value="MileageDown">Przebieg - Malejąco</option>
+                <option value="CapacityUp">Pojemność - Rosnąco</option>
+                <option value="CapacityDown">Pojemność - Malejąco</option>
+            </select>
         </div>
-    <div><b>Szukaj tylko</b></div>
-    <div>
-        <input type="radio" name="Hired" value="false">Dostepnych<br>
-        <input type="radio" name="Hired" value="true">Wypożyczonych<br>
     </div>
-    <input type="submit" value="Szukaj" />
 }
 
 <div>
