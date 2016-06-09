@@ -191,6 +191,7 @@
     </Compile>
     <Compile Include="HtmlHelpers\PagingHelper.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Models\CarListMainModel.cs" />
     <Compile Include="Models\CarSearch.cs" />
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\CarsListViewModel.cs" />
@@ -283,7 +284,9 @@
       <Name>CarHire.Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\CarListMainModel\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

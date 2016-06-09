@@ -1,4 +1,4 @@
-﻿@model CarHire.WebUI.Models.CarsListViewModel
+﻿@model CarHire.WebUI.Models.CarsListMainModel
 
 @{
     ViewBag.Title = "Samochody";
@@ -6,22 +6,45 @@
 
 @using (Html.BeginForm())
 {
-    <h3>Wyszukiwanie</h3>
-    <div>Model: 
-    <div>@Html.TextBox("NameSearch")</div></div>
-    <div>Marka: 
-    <div>@Html.TextBox("BrandSearch")</div></div>
-    @Html.CheckBox("Hired", (Request.Form["Hired"] ?? string.Empty).Contains("true")) <text>Tylko dostepne samochody</text> <br />
-    <input type="submit" value="Szukaj" />
-    <br/><br/>@Html.ActionLink("Wyszukiwanie zaawansowane", "Search");
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Wyszukiwanie</h3>
+            <div>Model: 
+            <div><input type="text" name="NameSearch" value="@Model.CarSearch.NameSearch"></div></div>
+            <div>Marka: 
+            <div><input type="text" name="BrandSearch" value="@Model.CarSearch.BrandSearch"></div></div>
+            <input type="checkbox" name="Hired" value="true" @if (Model.CarSearch.Hired == "true") { <text>Checked</text>}><text>Szukaj tylko dostepnych</text><br/>
+            <input type="submit" value="Szukaj" />
+        </div>
+        <div class="col-md-4">
+            <h3>Sortowanie</h3>
+            Sortuj według:
+            <select name="Sort">
+                <option value=""></option>
+                <option value="ModelUp" @if (Model.CarSearch.Sort == "ModelUp") {<text>selected</text>} >Model - Rosnąco</option>
+                <option value="ModelDown" @if (Model.CarSearch.Sort == "ModelDown") {<text>selected</text>} >Model - Malejąco</option>
+                <option value="BrandUp" @if (Model.CarSearch.Sort == "BrandUp") {<text>selected</text>} >Marka - Rosnąco</option>
+                <option value="BrandDown" @if (Model.CarSearch.Sort == "BrandDown") {<text>selected</text>} >Marka - Malejąco</option>
+                <option value="PriceUp" @if (Model.CarSearch.Sort == "PricUp") {<text>selected</text>} >Cena - Rosnąco</option>
+                <option value="PriceDown" @if (Model.CarSearch.Sort == "PriceDown") {<text>selected</text>} >Cena - Malejąco</option>
+                <option value="YearUp" @if (Model.CarSearch.Sort == "YearUp") {<text>selected</text>} >Rok produkcji - Rosnąco</option>
+                <option value="YearDown" @if (Model.CarSearch.Sort == "YearDown") {<text>selected</text>} >Rok produkcji - Malejąco</option>
+                <option value="MileageUp" @if (Model.CarSearch.Sort == "MileageUp") {<text>selected</text>} >Przebieg - Rosnąco</option>
+                <option value="MileageDown" @if (Model.CarSearch.Sort == "MileageDown") {<text>selected</text>} >Przebieg - Malejąco</option>
+                <option value="CapacityUp" @if (Model.CarSearch.Sort == "MileageUp") {<text>selected</text>} >Pojemność - Rosnąco</option>
+                <option value="CapacityDown" @if (Model.CarSearch.Sort == "MileageDown") {<text>selected</text>} >Pojemność - Malejąco</option>
+            </select>
+        </div>
+    </div>
+   
 }
+<br />@Html.ActionLink("Wyszukiwanie zaawansowane", "Search")<br /><br />
 
-<br />
-@foreach (var p in Model.Cars)
+@foreach (var p in Model.CarListViewModel.Cars)
 {
     @Html.Partial("CarSummary", p);
 }
 
 <div class="btn-group pull-right">
-    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x }))
+    @Html.PageLinks(Model.CarListViewModel.PagingInfo, x => Url.Action("List", new { page = x }))
 </div>

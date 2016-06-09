@@ -19,5 +19,6 @@ namespace CarHire.WebUI.Models
         public decimal MinCapacity { get; set; }
         public decimal MaxCapacity { get; set; }
         public string Category { get; set; }
+        public string Sort { get; set; }
     }
 }
