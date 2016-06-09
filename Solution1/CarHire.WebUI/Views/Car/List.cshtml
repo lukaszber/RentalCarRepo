@@ -21,18 +21,18 @@
             Sortuj według:
             <select name="Sort">
                 <option value=""></option>
-                <option value="ModelUp">Model - Rosnąco</option>
-                <option value="ModelDown">Model - Malejąco</option>
-                <option value="BrandUp">Marka - Rosnąco</option>
-                <option value="BrandDown">Marka - Malejąco</option>
-                <option value="PriceUp">Cena - Rosnąco</option>
-                <option value="PriceDown">Cena - Malejąco</option>
-                <option value="YearUp">Rok produkcji - Rosnąco</option>
-                <option value="YearDown">Rok produkcji - Malejąco</option>
-                <option value="MileageUp">Przebieg - Rosnąco</option>
-                <option value="MileageDown">Przebieg - Malejąco</option>
-                <option value="CapacityUp">Pojemność - Rosnąco</option>
-                <option value="CapacityDown">Pojemność - Malejąco</option>
+                <option value="ModelUp" @if (Model.CarSearch.Sort == "ModelUp") {<text>selected</text>} >Model - Rosnąco</option>
+                <option value="ModelDown" @if (Model.CarSearch.Sort == "ModelDown") {<text>selected</text>} >Model - Malejąco</option>
+                <option value="BrandUp" @if (Model.CarSearch.Sort == "BrandUp") {<text>selected</text>} >Marka - Rosnąco</option>
+                <option value="BrandDown" @if (Model.CarSearch.Sort == "BrandDown") {<text>selected</text>} >Marka - Malejąco</option>
+                <option value="PriceUp" @if (Model.CarSearch.Sort == "PricUp") {<text>selected</text>} >Cena - Rosnąco</option>
+                <option value="PriceDown" @if (Model.CarSearch.Sort == "PriceDown") {<text>selected</text>} >Cena - Malejąco</option>
+                <option value="YearUp" @if (Model.CarSearch.Sort == "YearUp") {<text>selected</text>} >Rok produkcji - Rosnąco</option>
+                <option value="YearDown" @if (Model.CarSearch.Sort == "YearDown") {<text>selected</text>} >Rok produkcji - Malejąco</option>
+                <option value="MileageUp" @if (Model.CarSearch.Sort == "MileageUp") {<text>selected</text>} >Przebieg - Rosnąco</option>
+                <option value="MileageDown" @if (Model.CarSearch.Sort == "MileageDown") {<text>selected</text>} >Przebieg - Malejąco</option>
+                <option value="CapacityUp" @if (Model.CarSearch.Sort == "MileageUp") {<text>selected</text>} >Pojemność - Rosnąco</option>
+                <option value="CapacityDown" @if (Model.CarSearch.Sort == "MileageDown") {<text>selected</text>} >Pojemność - Malejąco</option>
             </select>
         </div>
     </div>
