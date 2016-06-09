@@ -83,6 +83,7 @@ namespace CarHire.WebUI.Controllers
                 else
                     cars = cars.OrderBy(p => p.CarID);
             }
+            int totalCars = cars.Count();
             cars = cars.Skip((page - 1) * PageSize);
             cars = cars.Take(PageSize);
 
@@ -95,7 +96,7 @@ namespace CarHire.WebUI.Controllers
                     {
                         CurrentPage = page,
                         CarsPerPage = PageSize,
-                        TotalCars = repository.Cars.Count()
+                        TotalCars = totalCars
                     }
                 },
                 CarSearch = searchModel   
