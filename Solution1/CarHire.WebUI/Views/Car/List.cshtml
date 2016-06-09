@@ -6,14 +6,37 @@
 
 @using (Html.BeginForm())
 {
-    <h3>Wyszukiwanie</h3>
-    <div>Model: 
-    <div><input type="text" name="NameSearch" value="@Model.CarSearch.NameSearch"></div></div>
-    <div>Marka: 
-    <div><input type="text" name="BrandSearch" value="@Model.CarSearch.BrandSearch"></div></div>
-    <input type="checkbox" name="Hired" value="true" @if (Model.CarSearch.Hired == "true") { <text>Checked</text>}><text>Szukaj tylko dostepnych</text><br/>
-
-<input type="submit" value = "Szukaj" />
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Wyszukiwanie</h3>
+            <div>Model: 
+            <div><input type="text" name="NameSearch" value="@Model.CarSearch.NameSearch"></div></div>
+            <div>Marka: 
+            <div><input type="text" name="BrandSearch" value="@Model.CarSearch.BrandSearch"></div></div>
+            <input type="checkbox" name="Hired" value="true" @if (Model.CarSearch.Hired == "true") { <text>Checked</text>}><text>Szukaj tylko dostepnych</text><br/>
+            <input type="submit" value="Szukaj" />
+        </div>
+        <div class="col-md-4">
+            <h3>Sortowanie</h3>
+            Sortuj według:
+            <select name="Sort">
+                <option value=""></option>
+                <option value="ModelUp">Model - Rosnąco</option>
+                <option value="ModelDown">Model - Malejąco</option>
+                <option value="BrandUp">Marka - Rosnąco</option>
+                <option value="BrandDown">Marka - Malejąco</option>
+                <option value="PriceUp">Cena - Rosnąco</option>
+                <option value="PriceDown">Cena - Malejąco</option>
+                <option value="YearUp">Rok produkcji - Rosnąco</option>
+                <option value="YearDown">Rok produkcji - Malejąco</option>
+                <option value="MileageUp">Przebieg - Rosnąco</option>
+                <option value="MileageDown">Przebieg - Malejąco</option>
+                <option value="CapacityUp">Pojemność - Rosnąco</option>
+                <option value="CapacityDown">Pojemność - Malejąco</option>
+            </select>
+        </div>
+    </div>
+   
 }
 <br />@Html.ActionLink("Wyszukiwanie zaawansowane", "Search")<br /><br />
 
