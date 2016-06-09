@@ -8,15 +8,14 @@
 {
     <h3>Wyszukiwanie</h3>
     <div>Model: 
-    <div>@Html.TextBox("NameSearch")</div></div>
+    <div><input type="text" name="NameSearch"></div></div>
     <div>Marka: 
-    <div>@Html.TextBox("BrandSearch")</div></div>
-    @Html.CheckBox("Hired", (Request.Form["Hired"] ?? string.Empty).Contains("true")) <text>Tylko dostepne samochody</text> <br />
-    <input type="submit" value="Szukaj" />
-    <br/><br/>@Html.ActionLink("Wyszukiwanie zaawansowane", "Search");
+    <div><input type="text" name="BrandSearch"></div></div>
+    <input type="checkbox" name="Hired" value="true"><text>Szukaj tylko dostepnych</text><br/>
+    <input type="submit" value = "Szukaj" />
 }
+<br />@Html.ActionLink("Wyszukiwanie zaawansowane", "Search")<br /><br />
 
-<br />
 @foreach (var p in Model.Cars)
 {
     @Html.Partial("CarSummary", p);

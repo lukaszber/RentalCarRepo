@@ -98,6 +98,7 @@ namespace CarHire.WebUI.Controllers
             };
             return View(model);
         }
+
         public ViewResult Holder()
         {
             return View(repository.Cars);
