@@ -19,7 +19,7 @@ namespace CarHire.WebUI.Controllers
         }
         public ViewResult List(CarSearch searchModel, int page = 1)
         {
-            IEnumerable <Car> cars = repository.Cars;
+            IEnumerable<Car> cars = repository.Cars;
             if (ModelState.IsValid)
             {
                 if (searchModel.NameSearch == null)
@@ -37,19 +37,19 @@ namespace CarHire.WebUI.Controllers
                 if (searchModel.Category == null)
                     searchModel.Category = "";
                 cars = from i in repository.Cars
-                    where
-                        i.Model.Contains(searchModel.NameSearch) &&
-                        i.Brand.Contains(searchModel.BrandSearch) &&
-                        i.PricePerDay >= searchModel.MinPrice &&
-                        i.PricePerDay <= searchModel.MaxPrice &&
-                        i.Mileage >= searchModel.MinMileage &&
-                        i.Mileage <= searchModel.MaxMileage &&
-                        i.Year >= searchModel.MinYear&&
-                        i.Year <= searchModel.MaxYear &&
-                        i.Capacity >= searchModel.MinCapacity &&
-                        i.Capacity <= searchModel.MaxCapacity &&
-                        i.Category.Contains(searchModel.Category)
-                    select i;
+                       where
+                           i.Model.Contains(searchModel.NameSearch) &&
+                           i.Brand.Contains(searchModel.BrandSearch) &&
+                           i.PricePerDay >= searchModel.MinPrice &&
+                           i.PricePerDay <= searchModel.MaxPrice &&
+                           i.Mileage >= searchModel.MinMileage &&
+                           i.Mileage <= searchModel.MaxMileage &&
+                           i.Year >= searchModel.MinYear &&
+                           i.Year <= searchModel.MaxYear &&
+                           i.Capacity >= searchModel.MinCapacity &&
+                           i.Capacity <= searchModel.MaxCapacity &&
+                           i.Category.Contains(searchModel.Category)
+                       select i;
 
                 if (searchModel.Hired == "false")
                     cars = cars.Where(p => p.Hired == true);
@@ -86,16 +86,20 @@ namespace CarHire.WebUI.Controllers
             cars = cars.Skip((page - 1) * PageSize);
             cars = cars.Take(PageSize);
 
-            CarsListViewModel model = new CarsListViewModel
+            CarsListMainModel model = new CarsListMainModel
             {
-                Cars = cars,
-                PagingInfo = new PagingInfo
+                CarListViewModel = new CarsListViewModel
                 {
-                    CurrentPage = page,
-                    CarsPerPage = PageSize,
-                    TotalCars = repository.Cars.Count()
-                }
-            };
+                    Cars = cars,
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = page,
+                        CarsPerPage = PageSize,
+                        TotalCars = repository.Cars.Count()
+                    }
+                },
+                CarSearch = searchModel   
+             };
             return View(model);
         }
 

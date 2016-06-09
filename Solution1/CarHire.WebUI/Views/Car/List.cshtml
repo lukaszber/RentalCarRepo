@@ -1,4 +1,4 @@
-﻿@model CarHire.WebUI.Models.CarsListViewModel
+﻿@model CarHire.WebUI.Models.CarsListMainModel
 
 @{
     ViewBag.Title = "Samochody";
@@ -8,19 +8,20 @@
 {
     <h3>Wyszukiwanie</h3>
     <div>Model: 
-    <div><input type="text" name="NameSearch"></div></div>
+    <div><input type="text" name="NameSearch" value="@Model.CarSearch.NameSearch"></div></div>
     <div>Marka: 
-    <div><input type="text" name="BrandSearch"></div></div>
-    <input type="checkbox" name="Hired" value="true"><text>Szukaj tylko dostepnych</text><br/>
-    <input type="submit" value = "Szukaj" />
+    <div><input type="text" name="BrandSearch" value="@Model.CarSearch.BrandSearch"></div></div>
+    <input type="checkbox" name="Hired" value="true" @if (Model.CarSearch.Hired == "true") { <text>Checked</text>}><text>Szukaj tylko dostepnych</text><br/>
+
+<input type="submit" value = "Szukaj" />
 }
 <br />@Html.ActionLink("Wyszukiwanie zaawansowane", "Search")<br /><br />
 
-@foreach (var p in Model.Cars)
+@foreach (var p in Model.CarListViewModel.Cars)
 {
     @Html.Partial("CarSummary", p);
 }
 
 <div class="btn-group pull-right">
-    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x }))
+    @Html.PageLinks(Model.CarListViewModel.PagingInfo, x => Url.Action("List", new { page = x }))
 </div>
