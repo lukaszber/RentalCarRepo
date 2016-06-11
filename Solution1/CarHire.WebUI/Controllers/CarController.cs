@@ -154,13 +154,14 @@ namespace CarHire.WebUI.Controllers
             }
          }
 
-        public ViewResult Search()
+        public ViewResult Search(CarSearch searchModel)
         {
-            return View();
+            return View(searchModel);
         }
 
+        [ActionName("Search")]
         [HttpPost]
-        public ActionResult Search(CarSearch searchModel)
+        public ActionResult SearchPost(CarSearch searchModel)
         {
             return RedirectToAction("List", searchModel);
         }

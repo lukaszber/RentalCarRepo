@@ -1,4 +1,5 @@
-﻿
+﻿@model CarHire.WebUI.Models.CarSearch
+
 @{
     ViewBag.Title = "Search";
 }
@@ -11,43 +12,43 @@
         <div class="col-md-6">
             <div><b>Model</b></div>
             <div>
-                <input type="text" name="NameSearch">
+                <input type="text" name="NameSearch" value=@Model.NameSearch>
             </div>
             <div><b>Marka</b></div>
             <div>
-                <input type="text" name="BrandSearch">
+                <input type="text" name="BrandSearch" value=@Model.BrandSearch>
             </div>
             <div><b>Cena (zł/dzień)</b></div>
             <div>
-                Od: <input type="number" name="MinPrice">
-                Do: <input type="number" name="MaxPrice">
+                Od: <input type="number" name="MinPrice" value=@Model.MinPrice>
+                Do: <input type="number" name="MaxPrice" value=@Model.MaxPrice>
             </div>
             <div><b>Rok Produkcji</b></div>
             <div>
-                Od: <input type="number" name="MinYear">
-                Do: <input type="number" name="MaxYear">
+                Od: <input type="number" name="MinYear" value=@Model.MinYear>
+                Do: <input type="number" name="MaxYear" value=@Model.MaxYear>
             </div>
             <div><b>Przebieg (km)</b></div>
             <div>
-                Od: <input type="number" name="MinMileage">
-                Do: <input type="number" name="MaxMileage">
+                Od: <input type="number" name="MinMileage" value=@Model.MinMileage>
+                Do: <input type="number" name="MaxMileage" value=@Model.MaxMileage>
             </div>
             <div><b>Pojemność (l)</b></div>
             <div>
-                Od: <input type="number" step="0.1" name="MinCapacity">
-                Do: <input type="number" step="0.1" name="MaxCapacity">
+                Od: <input type="number" step="0.1" name="MinCapacity" value=@Model.MinCapacity>
+                Do: <input type="number" step="0.1" name="MaxCapacity" value=@Model.MaxCapacity>
             </div>
             <div><b>Kategoria</b></div>
             <div>
                 <select name="Category">
                     <option value=""></option>
-                    <option value="A1">A1</option>
-                    <option value="A2">A2</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="B+E">B+E</option>
-                    <option value="B1">B1</option>
-                    <option value="C">C</option>
+                    <option value="A1"  @if (Model.Category == "A1") { <text>selected</text>}>A1</option>
+                    <option value="A2" @if (Model.Category == "A2") { <text>selected</text>}>A2</option>
+                    <option value="A" @if (Model.Category == "A") { <text>selected</text>}>A</option>
+                    <option value="B" @if (Model.Category == "B") { <text>selected</text>}>B</option>
+                    <option value="B+E" @if (Model.Category == "B+E") { <text>selected</text>}>B+E</option>
+                    <option value="B1" @if (Model.Category == "B1") { <text>selected</text>}>B1</option>
+                    <option value="C" @if (Model.Category == "C") { <text>selected</text>}>C</option>
                 </select>
             </div>
             <div><b>Szukaj tylko</b></div>
@@ -62,18 +63,18 @@
             <b>Sortuj według:</b> <br/>
             <select name="Sort">
                 <option value=""></option>
-                <option value="ModelUp">Model - Rosnąco</option>
-                <option value="ModelDown">Model - Malejąco</option>
-                <option value="BrandUp">Marka - Rosnąco</option>
-                <option value="BrandDown">Marka - Malejąco</option>
-                <option value="PriceUp">Cena - Rosnąco</option>
-                <option value="PriceDown">Cena - Malejąco</option>
-                <option value="YearUp">Rok produkcji - Rosnąco</option>
-                <option value="YearDown">Rok produkcji - Malejąco</option>
-                <option value="MileageUp">Przebieg - Rosnąco</option>
-                <option value="MileageDown">Przebieg - Malejąco</option>
-                <option value="CapacityUp">Pojemność - Rosnąco</option>
-                <option value="CapacityDown">Pojemność - Malejąco</option>
+                <option value="ModelUp" @if (Model.Sort == "ModelUp") { <text> selected</text>}>Model - Rosnąco</option>
+                <option value="ModelDown" @if (Model.Sort == "ModelDown") { <text> selected</text>}>Model - Malejąco</option>
+                <option value="BrandUp" @if (Model.Sort == "BrandUp") { <text> selected</text>}>Marka - Rosnąco</option>
+                <option value="BrandDown" @if (Model.Sort == "BrandDown") { <text> selected</text>}>Marka - Malejąco</option>
+                <option value="PriceUp" @if (Model.Sort == "PricUp") { <text> selected</text>}>Cena - Rosnąco</option>
+                <option value="PriceDown" @if (Model.Sort == "PriceDown") { <text> selected</text>}>Cena - Malejąco</option>
+                <option value="YearUp" @if (Model.Sort == "YearUp") { <text> selected</text>}>Rok produkcji - Rosnąco</option>
+                <option value="YearDown" @if (Model.Sort == "YearDown") { <text> selected</text>}>Rok produkcji - Malejąco</option>
+                <option value="MileageUp" @if (Model.Sort == "MileageUp") { <text> selected</text>}>Przebieg - Rosnąco</option>
+                <option value="MileageDown" @if (Model.Sort == "MileageDown") { <text> selected</text>}>Przebieg - Malejąco</option>
+                <option value="CapacityUp" @if (Model.Sort == "MileageUp") { <text> selected</text>}>Pojemność - Rosnąco</option>
+                <option value="CapacityDown" @if (Model.Sort == "MileageDown") { <text> selected</text>}>Pojemność - Malejąco</option>
             </select>
         </div>
     </div>
