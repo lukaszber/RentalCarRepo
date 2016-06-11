@@ -9,6 +9,7 @@ using CarHire.WebUI.Controllers;
 using System.Web.Mvc;
 using CarHire.WebUI.Models;
 using CarHire.WebUI.HtmlHelpers;
+using System.Web;
 
 namespace CarHire.UnitTests
 {
@@ -29,9 +30,9 @@ namespace CarHire.UnitTests
             CarController controller = new CarController(mock.Object);
             controller.PageSize = 3;
             //działanie
-            IEnumerable<Car> result = (IEnumerable<Car>)controller.List(2).Model;
+            CarsListViewModel result = (CarsListViewModel)controller.List(null,2).Model;
             //asercje
-            Car[] carArray = result.ToArray();
+            Car[] carArray = result.Cars.ToArray();
             Assert.IsTrue(carArray.Length == 2);
             Assert.AreEqual(carArray[0].Model, "P4");
             Assert.AreEqual(carArray[1].Model, "P5");
@@ -65,5 +66,123 @@ namespace CarHire.UnitTests
                 + @"<a class=""btn btn-default"" href=""Strona3"">3</a>",
                 result.ToString());
         }
+        [TestMethod]
+        public void Can_Edit_Car()
+        {
+            Mock<ICarRepository> mock = new Mock<ICarRepository>();
+            mock.Setup(m => m.Cars).Returns(new Car[]
+            {
+                new Car {CarID=1,Model="M1" },
+                new Car {CarID=2,Model="M2" },
+                new Car {CarID=3,Model="M3" },
+            });
+
+            CarController target = new CarController(mock.Object);
+
+            Car m1 = target.Edit(1).ViewData.Model as Car;
+            Car m2 = target.Edit(2).ViewData.Model as Car;
+            Car m3 = target.Edit(3).ViewData.Model as Car;
+
+
+            Assert.AreEqual(1, m1.CarID);
+            Assert.AreEqual(2, m2.CarID);
+            Assert.AreEqual(3, m3.CarID);
+        }
+
+        [TestMethod]
+        public void Cannot_Edit_Nonexistent_Car()
+        {
+            Mock<ICarRepository> mock = new Mock<ICarRepository>();
+            mock.Setup(m => m.Cars).Returns(new Car[]
+            {
+                new Car {CarID=1,Model="M1" },
+                new Car {CarID=2,Model="M2" },
+                new Car {CarID=3,Model="M3" },
+            });
+
+            CarController target = new CarController(mock.Object);
+
+            Car result = (Car)target.Edit(4).ViewData.Model;
+
+
+            Assert.IsNull(result);
+        }
+        [TestMethod]
+        public void Can_Edit_User()
+        {
+            Mock<IUserRepository> mock = new Mock<IUserRepository>();
+            mock.Setup(m => m.Users).Returns(new User[]
+            {
+                new User {UserID=1,Name="U1" },
+                new User {UserID=2,Name="U2" },
+                new User {UserID=3,Name="U3" },
+            });
+
+            UsersController target = new UsersController(mock.Object);
+
+            User m1 = target.Edit(1).ViewData.Model as User;
+            User m2 = target.Edit(2).ViewData.Model as User;
+            User m3 = target.Edit(3).ViewData.Model as User;
+
+
+            Assert.AreEqual(1, m1.UserID);
+            Assert.AreEqual(2, m2.UserID);
+            Assert.AreEqual(3, m3.UserID);
+        }
+
+        [TestMethod]
+        public void Cannot_Edit_Nonexistent_User()
+        {
+            Mock<IUserRepository> mock = new Mock<IUserRepository>();
+            mock.Setup(m => m.Users).Returns(new User[]
+            {
+                new User {UserID=1,Name="U1" },
+                new User {UserID=2,Name="U2" },
+                new User {UserID=3,Name="U3" },
+            });
+
+            UsersController target = new UsersController(mock.Object);
+
+            User result = (User)target.Edit(4).ViewData.Model;
+            
+            Assert.IsNull(result);
+        }
+        [TestMethod]
+        public void Can_Delete_Valid_Car()
+        {
+            var car = new Car { CarID = 2, Model = "M1" };
+
+            Mock<ICarRepository> mock = new Mock<ICarRepository>();
+            mock.Setup(m => m.Cars).Returns(new Car[] {
+                new Car { CarID = 1, Model = "M2" },
+                car,
+                new Car { CarID = 3, Model = "M3" },
+             });
+
+            var target = new CarController(mock.Object);
+
+            target.Delete(car.CarID);
+
+            mock.Verify(m => m.DeleteCar(car.CarID));
+        }
+        [TestMethod]
+        public void Can_Delete_Valid_User()
+        {
+            var user = new User { UserID = 2, Name = "U1" };
+
+            Mock<IUserRepository> mock = new Mock<IUserRepository>();
+            mock.Setup(m => m.Users).Returns(new User[] {
+                new User { UserID = 1, Name = "U2" },
+                user,
+                new User { UserID = 3, Name = "U3" },
+             });
+
+            var target = new UsersController(mock.Object);
+
+            target.Delete(user.UserID);
+
+            mock.Verify(m => m.DeleteUser(user.UserID));
+        }
+
     }
 }
