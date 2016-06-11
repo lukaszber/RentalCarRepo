@@ -268,6 +268,7 @@
     <Content Include="Views\Shared\_Layout.Mobile.cshtml" />
     <Content Include="Views\Nav\Menu.Mobile.cshtml" />
     <Content Include="Views\Car\Search.cshtml" />
+    <Content Include="Views\Rental\ExportToExcel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
