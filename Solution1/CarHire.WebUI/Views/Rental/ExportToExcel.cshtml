@@ -8,12 +8,13 @@
 
 <html>
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width" />
     <title>ExportView</title>
 </head>
 <body>
     <div>
-        <table>
+        <table border="1">
             <tr>
                 <th>Nr.</th>
                 <th>Kto wypożyczał</th>
@@ -31,21 +32,21 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td class="text-center">@x</td>
+                    <td>@x</td>
                     @{
                         x++;
                     }
 
-                    <td class="text-center">@item.User.Name @item.User.Surname</td>
-                    <td class="text-center">@item.Car.Brand @item.Car.Model</td>
-                    <td class="text-center">@item.Rental.RentalDate.ToString("d")</td>
-                    <td class="text-center">@item.Rental.ReturnDate.ToString("d")</td>
+                    <td>@item.User.Name @item.User.Surname</td>
+                    <td>@item.Car.Brand @item.Car.Model</td>
+                    <td>@item.Rental.RentalDate.ToString("d")</td>
+                    <td>@item.Rental.ReturnDate.ToString("d")</td>
                     @{
                         s = item.Rental.ReturnDate.Day - item.Rental.RentalDate.Day;
                         y = y + item.Car.PricePerDay * s;
                         price = item.Car.PricePerDay * s;
                     }
-                    <td class="text-center">@price.ToString("c")</td>
+                    <td>@price.ToString("c")</td>
                 </tr>
                         }
 
@@ -54,7 +55,7 @@
             <th></th>
             <th></th>
             <th></th>
-            <th class="text-center">@y</th>
+            <th>@y</th>
         </table>
     </div>
 </body>
