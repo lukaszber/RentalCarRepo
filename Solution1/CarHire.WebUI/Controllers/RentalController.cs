@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using CarHire.Domain.Abstract;
 using CarHire.Domain.Entities;
 using CarHire.WebUI.Models;
+using System.IO;
+using System.Web.UI;
 
 namespace CarHire.WebUI.Controllers
 {
@@ -151,6 +153,31 @@ namespace CarHire.WebUI.Controllers
             return RedirectToAction("ActionList", "Rental");
 
         }
-    }
 
+        public ActionResult ExportToExcel()
+        {
+            var loggedUser = Session["LogedUserID"].ToString();
+            var cars = carRepository.Cars;
+            var rentals = rentalRepository.Rent;
+            var users = userRepository.Users;
+            var rentalViewModelList = new List<RentalViewAggregator>();
+            foreach (var rent in rentals)
+            {
+                var car = cars.First(c => c.CarID == rent.CarId);
+                var user = users.First(c => c.UserID == rent.UserId);
+                if (Session["Category"].Equals("Kierownik") || Session["Category"].Equals("Pracownik") || Session["LogedUserID"].Equals(user.UserID))
+                    rentalViewModelList.Add(new RentalViewAggregator()
+                    {
+                        User = user,
+                        Car = car,
+                        Rental = rent
+                    });
+            }
+            Response.Charset = "utf-8";
+            Response.AddHeader("content-disposition", "attachment; filename=Raport.xls");
+            Response.ContentType = "application/excel";
+            return View(rentalViewModelList);
+  
+        }
+    }
 }
