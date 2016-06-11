@@ -20,23 +20,23 @@
             </div>
             <div><b>Cena (zł/dzień)</b></div>
             <div>
-                Od: <input type="number" name="MinPrice" value=@Model.MinPrice>
-                Do: <input type="number" name="MaxPrice" value=@Model.MaxPrice>
+                Od: <input type="number" name="MinPrice" value=@if (Model.MinPrice!= 0) {@Model.MinPrice}>
+                Do: <input type="number" name="MaxPrice" value=@if (Model.MaxPrice != decimal.MaxValue) {@Model.MaxPrice}>
             </div>
             <div><b>Rok Produkcji</b></div>
             <div>
-                Od: <input type="number" name="MinYear" value=@Model.MinYear>
-                Do: <input type="number" name="MaxYear" value=@Model.MaxYear>
+                Od: <input type="number" name="MinYear" value=@if (Model.MinYear != 0) {@Model.MinYear}>
+                Do: <input type="number" name="MaxYear" value=@if (Model.MaxYear != int.MaxValue) {@Model.MaxYear}>
             </div>
             <div><b>Przebieg (km)</b></div>
             <div>
-                Od: <input type="number" name="MinMileage" value=@Model.MinMileage>
-                Do: <input type="number" name="MaxMileage" value=@Model.MaxMileage>
+                Od: <input type="number" name="MinMileage" value=@if (Model.MinMileage != 0) {@Model.MinMileage}>
+                Do: <input type="number" name="MaxMileage" value=@if (Model.MaxMileage != decimal.MaxValue) {@Model.MaxMileage}>
             </div>
             <div><b>Pojemność (l)</b></div>
             <div>
-                Od: <input type="number" step="0.1" name="MinCapacity" value=@Model.MinCapacity>
-                Do: <input type="number" step="0.1" name="MaxCapacity" value=@Model.MaxCapacity>
+                Od: <input type="number" step="0.1" name="MinCapacity" value=@if (Model.MinCapacity != 0) {@Model.MinCapacity}>
+                Do: <input type="number" step="0.1" name="MaxCapacity" value=@if (Model.MaxCapacity != decimal.MaxValue) {@Model.MaxCapacity}>
             </div>
             <div><b>Kategoria</b></div>
             <div>
@@ -53,8 +53,8 @@
             </div>
             <div><b>Szukaj tylko</b></div>
             <div>
-                <input type="radio" name="Hired" value="true">Dostepnych<br>
-                <input type="radio" name="Hired" value="false">Wypożyczonych<br>
+                <input type="radio" name="Hired" value="true" @if (Model.Hired == "true") { <text>checked</text>}>Dostepnych<br>
+                <input type="radio" name="Hired" value="false" @if (Model.Hired == "false") { <text>checked</text>}>Wypożyczonych<br>
             </div>
             <input type="submit" value="Szukaj" />
         </div>
