@@ -13,11 +13,12 @@ namespace CarHire.WebUI.Models
         public decimal MaxMileage { get; set; }
         public decimal MinPrice { get; set; }
         public decimal MaxPrice { get; set; }
-        public String Hired { get; set; }
+        public string Hired { get; set; }
         public int MinYear { get; set; }
         public int MaxYear { get; set; }
         public decimal MinCapacity { get; set; }
         public decimal MaxCapacity { get; set; }
         public string Category { get; set; }
+        public string Sort { get; set; }
     }
 }

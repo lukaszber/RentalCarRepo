@@ -191,6 +191,7 @@
     </Compile>
     <Compile Include="HtmlHelpers\PagingHelper.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Models\CarListMainModel.cs" />
     <Compile Include="Models\CarSearch.cs" />
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\CarsListViewModel.cs" />
