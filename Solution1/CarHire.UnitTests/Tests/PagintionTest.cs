@@ -21,18 +21,18 @@ namespace CarHire.UnitTests
             Mock<ICarRepository> mock = new Mock<ICarRepository>();
             mock.Setup(m => m.Cars).Returns(new Car[]
             {
-                new Car {CarID=1,Model="P1" },
-                new Car {CarID=2,Model="P2" },
-                new Car {CarID=3,Model="P3" },
-                new Car {CarID=4,Model="P4" },
-                new Car {CarID=5,Model="P5" }
+                new Car {CarID=1, Model="P1", Brand="B1", Category="" },
+                new Car {CarID=2, Model="P2", Brand="B2", Category="" },
+                new Car {CarID=3, Model="P3", Brand="B3", Category="" },
+                new Car {CarID=4, Model="P4", Brand="B4", Category="" },
+                new Car {CarID=5, Model="P5", Brand="B5", Category="" }
             });
             CarController controller = new CarController(mock.Object);
             controller.PageSize = 3;
             //działanie
-            CarsListViewModel result = (CarsListViewModel)controller.List(null,2).Model;
+            CarsListMainModel result = (CarsListMainModel)controller.List(new CarSearch(),2).Model;
             //asercje
-            Car[] carArray = result.Cars.ToArray();
+            Car[] carArray = result.CarListViewModel.Cars.ToArray();
             Assert.IsTrue(carArray.Length == 2);
             Assert.AreEqual(carArray[0].Model, "P4");
             Assert.AreEqual(carArray[1].Model, "P5");
