@@ -107,6 +107,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\CarTest.cs" />
     <Compile Include="Tests\UserTest.cs" />
+    <Compile Include="Tests\SearchTest.cs" />
+    <Compile Include="Tests\SortTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
