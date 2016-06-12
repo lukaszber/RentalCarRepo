@@ -44,7 +44,16 @@
                     <label>Nr. Pesel:</label><p></p>
                     @Html.EditorFor(x => x.Pesel)
                 </div>
-               
+        if (Session["Category"] == null) { }
+        else if (Session["Category"].Equals("Kierownik"))
+        {
+            <div class="form-group">
+                <label>Kierowca:</label><p></p>
+                @Html.EditorFor(x => x.Driver)
+            </div>
+
+        }
+
 
     <div class="panel-footer">
         <input type="submit" value="Zapisz" class="btn btn-primary" />

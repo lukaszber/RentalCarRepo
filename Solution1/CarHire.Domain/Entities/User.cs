@@ -33,5 +33,7 @@ namespace CarHire.Domain.Entities
         [HiddenInput]
         //[Required(ErrorMessage = "Prosze podać Categorie")]
         public string Category { get; set; }
+            
+        public bool Driver { get; set; }
     }
 }

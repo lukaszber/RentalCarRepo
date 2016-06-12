@@ -74,6 +74,7 @@ namespace CarHire.WebUI.Controllers
                         Session["LogedUserID"] = v.UserID;
                         Session["LogedUserFullname"] = v.Name.ToString();
                         Session["Category"] = v.Category.ToString();
+                        Session["Driver"] = v.Driver.ToString();
                         return RedirectToAction("Index");
                     }
                 }

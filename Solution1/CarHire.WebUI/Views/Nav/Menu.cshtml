@@ -1,4 +1,6 @@
-﻿@if (Session["Category"] == null)
+﻿
+
+@if (Session["Category"] == null)
 {
     @Html.ActionLink("Strona główna", "Index", "Home", null, new { @class = "btn btn-block btn-default btn-lg" })
     @Html.ActionLink("Wypożycz", "List", "Car", null, new { @class = "btn btn-block btn-default btn-lg" })
@@ -24,7 +26,8 @@ else if (Session["Category"].Equals("Pracownik"))
     @Html.ActionLink("Wnioski", "ActionList", "Rental", null, new { @class = "btn btn-block btn-default btn-lg" })
     @Html.ActionLink("Oddaj auto", "ReturnList", "Rental", null, new { @class = "btn btn-block btn-default btn-lg" })
     @Html.ActionLink("Edycja Danych", "Edit", "Users", new { userId = x }, new { @class = "btn btn-block btn-default btn-lg" })
-
+    if (Session["Driver"].ToString().Equals("False")) { }
+    else if (Session["Driver"].ToString().Equals("True")) { }
 }
 else if (Session["Category"].Equals("Klient"))
 {
