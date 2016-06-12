@@ -1,0 +1,62 @@
+﻿@model  IEnumerable<CarHire.WebUI.Models.RentalViewAggregator>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" />
+    <title>ExportView</title>
+</head>
+<body>
+    <div>
+        <table border="1">
+            <tr>
+                <th>Nr.</th>
+                <th>Kto wypożyczał</th>
+                <th>Wypożyczone auto</th>
+                <th>Data wypożyczenia</th>
+                <th>Data Zwrotu</th>
+                <th>Koszt wypożyczenia</th>
+            </tr>
+            @{
+                int x = 1;
+                decimal y = 0;
+                int s;
+                decimal price = 0;
+            }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@x</td>
+                    @{
+                        x++;
+                    }
+
+                    <td>@item.User.Name @item.User.Surname</td>
+                    <td>@item.Car.Brand @item.Car.Model</td>
+                    <td>@item.Rental.RentalDate.ToString("d")</td>
+                    <td>@item.Rental.ReturnDate.ToString("d")</td>
+                    @{
+                        s = item.Rental.ReturnDate.Day - item.Rental.RentalDate.Day;
+                        y = y + item.Car.PricePerDay * s;
+                        price = item.Car.PricePerDay * s;
+                    }
+                    <td>@price.ToString("c")</td>
+                </tr>
+                        }
+
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>@y</th>
+        </table>
+    </div>
+</body>
+</html>
