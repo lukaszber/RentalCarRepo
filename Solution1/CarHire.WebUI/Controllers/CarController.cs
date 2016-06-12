@@ -47,14 +47,16 @@ namespace CarHire.WebUI.Controllers
                            i.Year >= searchModel.MinYear &&
                            i.Year <= searchModel.MaxYear &&
                            i.Capacity >= searchModel.MinCapacity &&
-                           i.Capacity <= searchModel.MaxCapacity &&
-                           i.Category.Contains(searchModel.Category)
+                           i.Capacity <= searchModel.MaxCapacity
                        select i;
 
                 if (searchModel.Hired == "false")
                     cars = cars.Where(p => p.Hired == true);
                 else if (searchModel.Hired == "true")
                     cars = cars.Where(p => p.Hired == false);
+
+                if (searchModel.Category != "")
+                    cars = cars.Where(p => p.Category.Equals(searchModel.Category));
 
                 if (searchModel.Sort == "ModelUp")
                     cars = cars.OrderBy(p => p.Model);
