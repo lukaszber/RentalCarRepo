@@ -70,6 +70,28 @@ namespace CarHire.WebUI.Controllers
             };
             return View(model);
         }
+
+        public ViewResult BusList(CarSearch searchModel, int page = 1)
+        {
+            var car = repository.Cars;
+            var cars = new List<Car>();
+            foreach (var c in car) {
+                if (c.Category.Equals("C"))
+                    cars.Add(c);
+            }
+
+            CarsListViewModel model = new CarsListViewModel
+            {
+                Cars = cars,
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    CarsPerPage = PageSize,
+                    TotalCars = repository.Cars.Count()
+                }
+            };
+            return View(model);
+        }
         public ViewResult Holder()
         {
             return View(repository.Cars);

@@ -24,6 +24,8 @@ namespace CarHire.Domain.Entities
         public DateTime ReturnDate { get; set; }
         [DataType(System.ComponentModel.DataAnnotations.DataType.Date)]
         public DateTime Extension { get; set; }
+        public string From { get; set; }
+        public string To { get; set; }
         public string Status { get; set; }
 
     }
