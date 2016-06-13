@@ -2,7 +2,7 @@
 
 <div class="well">
 
-<h3><p><strong>@Model.Brand @Model.Model</strong></p></h3>
+<h3><p><strong>@Html.ActionLink(Model.Brand.ToString() + " " + Model.Model.ToString(), "Details", new { id = Model.CarID }, new { style = "text-decoration:none; color: inherit;" }) </strong></p></h3>
 <h3>
     @if (Model.Hired == true)
     {

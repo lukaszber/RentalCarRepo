@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using CarHire.Domain.Abstract;
 using CarHire.Domain.Entities;
 using CarHire.WebUI.Models;
+using System.Net;
+
 namespace CarHire.WebUI.Controllers
 {
     public class CarController : Controller
@@ -166,6 +168,20 @@ namespace CarHire.WebUI.Controllers
         public ActionResult SearchPost(CarSearch searchModel)
         {
             return RedirectToAction("List", searchModel);
+        }
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Car car = repository.Cars.FirstOrDefault(p => p.CarID == id);
+            if (car == null)
+            {
+                return HttpNotFound();
+            }
+            return View(car);
         }
     }
 }
