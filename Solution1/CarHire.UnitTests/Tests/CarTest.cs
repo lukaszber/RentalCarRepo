@@ -70,5 +70,6 @@ namespace CarHire.UnitTests
 
             mock.Verify(m => m.DeleteCar(car.CarID));
         }
+
     }
 }

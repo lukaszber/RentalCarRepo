@@ -29,6 +29,8 @@ namespace CarHire.Domain.Entities
         [Required(ErrorMessage = "Prosze podać pojemność auta")]
         public decimal Capacity { get; set; }
         public string Category { get; set; }
+        public byte[] ImageData { get; set; }
+        public string ImageMimeType { get; set; }
 
     }
 }

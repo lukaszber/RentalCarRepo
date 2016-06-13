@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     List<SelectListItem> list = new List<SelectListItem>();
-    SelectListItem add = new SelectListItem() {Text = "AM", Value= "AM" };
+    SelectListItem add = new SelectListItem() { Text = "AM", Value = "AM" };
     list.Add(add);
     add = new SelectListItem() { Text = "A1", Value = "A1" };
     list.Add(add);
@@ -25,12 +25,16 @@
 
 <div class="panel">
     <div class="panel-heading">
-        <h3>Edycja @Model.Brand @Model.Model</h3>
+        <h3>Edycja @Model.Model</h3>
     </div>
 
-    @using (Html.BeginForm("Edit", "Car"))
+    @using (Html.BeginForm("Edit", "Car",
+                                FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        @Html.ValidationSummary()
+
+        <div class="panel-body">
+            @Html.HiddenFor(m => m.CarID)
+           @Html.ValidationSummary()
         <div class="form-group">
             <label>Marka:</label><p></p>
             @Html.EditorFor(x => x.Brand)
@@ -56,17 +60,42 @@
             @Html.EditorFor(x => x.Year)
         </div>
 
-                <div class="form-group">
-                    <label>Pojemność:</label><p></p>
-                    @Html.EditorFor(x => x.Capacity)
-                </div>
+        <div class="form-group">
+            <label>Pojemność:</label><p></p>
+            @Html.EditorFor(x => x.Capacity)
+        </div>
 
-                <div class="form-group">
-                    <label>Kategoria:</label><p></p>
-                    @Html.DropDownListFor(m => m.Category, list)
-                </div>
+        <div class="form-group">
+            <label>Kategoria:</label><p></p>
+            @Html.DropDownListFor(m => m.Category, list)
+        </div>
 
-             <div class="panel-footer">
+            <div class="form-group">
+                <div style="position:relative;">
+                    <label>Zdjęcie</label>
+                    <a class='btn' href='javascript:;'>
+                        Wybierz plik...
+                        <input type="file" name="Image" size="40"
+                               style="position:absolute;z-index:2;top:0;
+                            left:0;filter: alpha(opacity=0); opacity:0;
+                            background-color:transparent;color:transparent;"
+                               onchange='$("#upload-file-info").html($(this).val());'>
+                    </a>
+                    <span class='label label-info' id="upload-file-info"></span>
+                </div>
+                @if (Model.ImageData == null)
+                {
+                    <div class="form-control-static">Brak zdjęcia</div>
+                }
+                else {
+                    <img class="img-thumbnail" width="150" height="150"
+                         src="@Url.Action("GetImage", "Car",
+                        new { Model.CarID })" />
+                }
+            </div>
+        </div>
+
+        <div class="panel-footer">
             <input type="submit" value="Zapisz" class="btn btn-primary" />
             @Html.ActionLink("Anuluj i wróć do listy", "Holder", null, new
        {

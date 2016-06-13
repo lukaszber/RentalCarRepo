@@ -23,7 +23,7 @@ namespace CarHire.Domain.Concrete
             }
             else
             {
-                Car dbEntry = context.Cars.Find(car.CarID);
+                var dbEntry = context.Cars.Find(car.CarID);
                 if (dbEntry != null)
                 {
                     dbEntry.Brand = car.Brand;
@@ -34,6 +34,8 @@ namespace CarHire.Domain.Concrete
                     dbEntry.RegistrationNumber = car.RegistrationNumber;
                     dbEntry.Hired = car.Hired;
                     dbEntry.Year = car.Year;
+                    dbEntry.ImageData = car.ImageData;
+                    dbEntry.ImageMimeType = car.ImageMimeType;
                 }
             }
             context.SaveChanges();

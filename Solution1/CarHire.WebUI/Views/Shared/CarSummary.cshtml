@@ -1,6 +1,14 @@
 ﻿@model CarHire.Domain.Entities.Car
 
 <div class="well">
+    @if (Model.ImageData != null)
+    {
+        <div class="pull-left" style="margin-right: 10px">
+            <img class="img-thumbnail" width="75" height="75"
+                 src="@Url.Action("GetImage", "Car",
+                new { Model.CarID })" />
+        </div>
+    }
 
 <h3><p><strong>@Html.ActionLink(Model.Brand.ToString() + " " + Model.Model.ToString(), "Details", new { id = Model.CarID }, new { style = "text-decoration:none; color: inherit;" }) </strong></p></h3>
 <h3>

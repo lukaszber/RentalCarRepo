@@ -117,7 +117,7 @@ namespace CarHire.WebUI.Controllers
                     cars.Add(c);
             }
 
-            CarsListViewModel model = new CarsListViewModel
+            var model = new CarsListViewModel
             {
                 Cars = cars,
                 PagingInfo = new PagingInfo
@@ -142,16 +142,32 @@ namespace CarHire.WebUI.Controllers
                 Car car = repository.Cars.FirstOrDefault(p => p.CarID == carId);
                 return View(car);
         }
+        public FileContentResult GetImage(int carId) {
+            var car = repository.Cars.FirstOrDefault(c => c.CarID == carId);
+            if (car != null)
+            {
+                return File(car.ImageData, car.ImageMimeType);
+            }
+            else {
+                return null;
+            }
+
+        }
         [HttpPost]
-        public ActionResult Edit(Car car)
+        public ActionResult Edit(Car car, HttpPostedFileBase image=null)
         {
             if (Session["Category"] == null || Session["Category"].Equals("Pracownik") || Session["Category"].Equals("Klient"))
             {
                 return RedirectToAction("Index", "Home");
             }
             else { 
-                if (ModelState.IsValid)
-                {
+                if (ModelState.IsValid) { 
+                    if(image != null)
+                    {
+                        car.ImageMimeType = image.ContentType;
+                        car.ImageData = new byte[image.ContentLength];
+                        image.InputStream.Read(car.ImageData, 0, image.ContentLength);
+                    }
                     repository.SaveCar(car);
                     return RedirectToAction("Index", "Home");
                 }
