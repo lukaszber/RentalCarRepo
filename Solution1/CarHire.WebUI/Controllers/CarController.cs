@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using CarHire.Domain.Abstract;
 using CarHire.Domain.Entities;
 using CarHire.WebUI.Models;
+using System.Net;
+
 namespace CarHire.WebUI.Controllers
 {
     public class CarController : Controller
@@ -19,7 +21,7 @@ namespace CarHire.WebUI.Controllers
         }
         public ViewResult List(CarSearch searchModel, int page = 1)
         {
-            IEnumerable <Car> cars = repository.Cars;
+            IEnumerable<Car> cars = repository.Cars;
             if (ModelState.IsValid)
             {
                 if (searchModel.NameSearch == null)
@@ -34,6 +36,8 @@ namespace CarHire.WebUI.Controllers
                     searchModel.MaxMileage = decimal.MaxValue;
                 if (searchModel.MaxCapacity == 0)
                     searchModel.MaxCapacity = decimal.MaxValue;
+                if (searchModel.Category == null)
+                    searchModel.Category = "";
                 cars = from i in repository.Cars
                        where
                            i.Model.Contains(searchModel.NameSearch) &&
@@ -42,7 +46,7 @@ namespace CarHire.WebUI.Controllers
                            i.PricePerDay <= searchModel.MaxPrice &&
                            i.Mileage >= searchModel.MinMileage &&
                            i.Mileage <= searchModel.MaxMileage &&
-                           i.Year >= searchModel.MinYear&&
+                           i.Year >= searchModel.MinYear &&
                            i.Year <= searchModel.MaxYear &&
                            i.Capacity >= searchModel.MinCapacity &&
                            i.Capacity <= searchModel.MaxCapacity
@@ -52,21 +56,54 @@ namespace CarHire.WebUI.Controllers
                     cars = cars.Where(p => p.Hired == true);
                 else if (searchModel.Hired == "true")
                     cars = cars.Where(p => p.Hired == false);
-            }
 
+                if (searchModel.Category != "")
+                    cars = cars.Where(p => p.Category.Equals(searchModel.Category));
+
+                if (searchModel.Sort == "ModelUp")
+                    cars = cars.OrderBy(p => p.Model);
+                else if (searchModel.Sort == "ModelDown")
+                    cars = cars.OrderByDescending(p => p.Model);
+                else if (searchModel.Sort == "BrandUp")
+                    cars = cars.OrderBy(p => p.Brand);
+                else if (searchModel.Sort == "BrandDown")
+                    cars = cars.OrderByDescending(p => p.Brand);
+                else if (searchModel.Sort == "PriceUp")
+                    cars = cars.OrderBy(p => p.PricePerDay);
+                else if (searchModel.Sort == "PriceDown")
+                    cars = cars.OrderByDescending(p => p.PricePerDay);
+                else if (searchModel.Sort == "YearUp")
+                    cars = cars.OrderBy(p => p.Year);
+                else if (searchModel.Sort == "YearDown")
+                    cars = cars.OrderByDescending(p => p.Year);
+                else if (searchModel.Sort == "MileageUp")
+                    cars = cars.OrderBy(p => p.Mileage);
+                else if (searchModel.Sort == "MileageDown")
+                    cars = cars.OrderByDescending(p => p.Mileage);
+                else if (searchModel.Sort == "CapacityUp")
+                    cars = cars.OrderBy(p => p.Capacity);
+                else if (searchModel.Sort == "CapacityDown")
+                    cars = cars.OrderByDescending(p => p.Capacity);
+                else
             cars = cars.OrderBy(p => p.CarID);
+            }
+            int totalCars = cars.Count();
             cars = cars.Skip((page - 1) * PageSize);
             cars = cars.Take(PageSize);
 
-            CarsListViewModel model = new CarsListViewModel
+            CarsListMainModel model = new CarsListMainModel
+            {
+                CarListViewModel = new CarsListViewModel
             {
                 Cars = cars,
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     CarsPerPage = PageSize,
-                    TotalCars = repository.Cars.Count()
+                        TotalCars = totalCars
                 }
+                },
+                CarSearch = searchModel   
             };
             return View(model);
         }
@@ -142,15 +179,30 @@ namespace CarHire.WebUI.Controllers
             }
          }
 
-        public ViewResult Search()
+        public ViewResult Search(CarSearch searchModel)
         {
-            return View();
+            return View(searchModel);
         }
 
+        [ActionName("Search")]
         [HttpPost]
-        public ActionResult Search(CarSearch searchModel)
+        public ActionResult SearchPost(CarSearch searchModel)
         {
             return RedirectToAction("List", searchModel);
+        }
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Car car = repository.Cars.FirstOrDefault(p => p.CarID == id);
+            if (car == null)
+            {
+                return HttpNotFound();
+            }
+            return View(car);
         }
     }
 }

@@ -1,0 +1,65 @@
+﻿@model CarHire.Domain.Entities.Car
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>@Html.DisplayFor(model => model.Brand) @Html.DisplayFor(model => model.Model)</h2>
+
+<div>
+    <h4>Szczegóły</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Przebieg
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mileage) km <br />
+        </dd>
+
+        <dt>
+            Numer rejestracyjny
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegistrationNumber) <br />
+        </dd>
+
+        <dt>
+            Cena
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PricePerDay) zł/dzień<br />
+        </dd>
+
+        <dt>
+            Rok produkcji
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+
+        <dt>
+            Pojemność
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Capacity) l <br />
+        </dd>
+
+        <dt>
+            Kategoria
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category) <br />
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Powrót do listy", "List")
+</p>

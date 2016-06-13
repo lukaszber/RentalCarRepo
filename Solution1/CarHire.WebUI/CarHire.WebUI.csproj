@@ -191,6 +191,7 @@
     </Compile>
     <Compile Include="HtmlHelpers\PagingHelper.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Models\CarListMainModel.cs" />
     <Compile Include="Models\CarSearch.cs" />
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\CarsListViewModel.cs" />
@@ -267,6 +268,8 @@
     <Content Include="Views\Shared\_Layout.Mobile.cshtml" />
     <Content Include="Views\Nav\Menu.Mobile.cshtml" />
     <Content Include="Views\Car\Search.cshtml" />
+    <Content Include="Views\Rental\ExportToExcel.cshtml" />
+    <Content Include="Views\Car\Details.cshtml" />
     <Content Include="Views\Car\BusList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
