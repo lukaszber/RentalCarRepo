@@ -50,7 +50,7 @@ namespace CarHire.WebUI.Controllers
         }
         public ViewResult Edit(int rentalId)
         {
-            Rental rent = rentalRepository.Rent.FirstOrDefault(p => p.RentalId == rentalId);
+            var rent = rentalRepository.Rent.FirstOrDefault(p => p.RentalId == rentalId);
             return View(rent);
         }
 
@@ -72,7 +72,7 @@ namespace CarHire.WebUI.Controllers
         }
         public ViewResult Extend(int rentalId)
         {
-            Rental rent = rentalRepository.Rent.FirstOrDefault(p => p.RentalId == rentalId);
+            var rent = rentalRepository.Rent.FirstOrDefault(p => p.RentalId == rentalId);
             return View(rent);
         }
         [HttpPost]

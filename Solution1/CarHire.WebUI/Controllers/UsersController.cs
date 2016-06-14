@@ -54,7 +54,7 @@ namespace CarHire.WebUI.Controllers
         }
         public ViewResult Edit(int userId)
         {
-            User user = repository.Users.FirstOrDefault(p => p.UserID == userId);
+            var user = repository.Users.FirstOrDefault(p => p.UserID == userId);
             return View(user);
         }
         [HttpPost]
@@ -96,7 +96,7 @@ namespace CarHire.WebUI.Controllers
         [HttpPost]
         public ActionResult Delete(int UserId)
         {
-            User deletedUser = repository.DeleteUser(UserId);
+            var deletedUser = repository.DeleteUser(UserId);
             if (deletedUser != null)
             {
                 TempData["massage"] = string.Format("Usunięto {0}", deletedUser.Name);
@@ -110,8 +110,5 @@ namespace CarHire.WebUI.Controllers
 
             return Json(user == null);
         }
-
     }
-
-
 }

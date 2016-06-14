@@ -21,7 +21,7 @@ namespace CarHire.WebUI.Controllers
         }
         public ViewResult List(CarSearch searchModel, int page = 1)
         {
-            IEnumerable<Car> cars = repository.Cars;
+            var cars = repository.Cars;
             if (ModelState.IsValid)
             {
                 if (searchModel.NameSearch == null)
@@ -87,11 +87,11 @@ namespace CarHire.WebUI.Controllers
                 else
             cars = cars.OrderBy(p => p.CarID);
             }
-            int totalCars = cars.Count();
+            var totalCars = cars.Count();
             cars = cars.Skip((page - 1) * PageSize);
             cars = cars.Take(PageSize);
 
-            CarsListMainModel model = new CarsListMainModel
+            var model = new CarsListMainModel
             {
                 CarListViewModel = new CarsListViewModel
             {
@@ -139,7 +139,7 @@ namespace CarHire.WebUI.Controllers
         }
         public ViewResult Edit(int carId)
         {
-                Car car = repository.Cars.FirstOrDefault(p => p.CarID == carId);
+                var car = repository.Cars.FirstOrDefault(p => p.CarID == carId);
                 return View(car);
         }
         public FileContentResult GetImage(int carId) {
@@ -186,7 +186,7 @@ namespace CarHire.WebUI.Controllers
                 return RedirectToAction("Index", "Home");
             }
             else {
-                Car deletedCar = repository.DeleteCar(CarId);
+                var deletedCar = repository.DeleteCar(CarId);
                 if (deletedCar != null)
                 {
                     TempData["massage"] = string.Format("Usunięto {0}", deletedCar.Model);
@@ -213,7 +213,7 @@ namespace CarHire.WebUI.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Car car = repository.Cars.FirstOrDefault(p => p.CarID == id);
+            var car = repository.Cars.FirstOrDefault(p => p.CarID == id);
             if (car == null)
             {
                 return HttpNotFound();
