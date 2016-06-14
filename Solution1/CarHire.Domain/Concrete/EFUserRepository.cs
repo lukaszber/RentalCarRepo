@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using CarHire.Domain.Entities;
 using CarHire.Domain.Abstract;
+using System.Data.SqlClient;
+
 namespace CarHire.Domain.Concrete
 {
     public class EFUserRepository: IUserRepository
@@ -37,7 +39,18 @@ namespace CarHire.Domain.Concrete
                     dbEntry.Pesel = user.Pesel;
                 }
             }
-            context.SaveChanges();
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (SqlException sqlExc)
+            {
+                foreach (SqlError error in sqlExc.Errors)
+                {
+                    string msg = string.Format("{0}: {1}", error.Number, error.Message);
+                }
+            }
+            
         }
         public void NewUser(User user, string category)
         {

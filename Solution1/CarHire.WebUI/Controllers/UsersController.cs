@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using CarHire.Domain.Abstract;
 using CarHire.Domain.Entities;
+using System.Web.Security;
+
 namespace CarHire.WebUI.Controllers
 {
     public class UsersController : Controller
@@ -101,6 +103,15 @@ namespace CarHire.WebUI.Controllers
             }
             return RedirectToAction("Index","Home");
         }
+        [HttpPost]
+        public JsonResult IsUserExistInDatabase(string username)
+        {
+            var user = Membership.GetUser(username);
+
+            return Json(user == null);
+        }
+
     }
+
 
 }

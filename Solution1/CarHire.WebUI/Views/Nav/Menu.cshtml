@@ -4,7 +4,7 @@
 {
     @Html.ActionLink("Strona główna", "Index", "Home", null, new { @class = "btn btn-block btn-primary btn-lg" })
     @Html.ActionLink("Wypożycz", "List", "Car", null, new { @class = "btn btn-block btn-default btn-lg" })
-    @Html.ActionLink("Wypożycz", "BusList", "Car", null, new { @class = "btn btn-block btn-default btn-lg" })
+    @Html.ActionLink("Wypożycz Busa", "BusList", "Car", null, new { @class = "btn btn-block btn-default btn-lg" })
 }
 else if (Session["Category"].Equals("Kierownik"))
 {
@@ -35,6 +35,7 @@ else if (Session["Category"].Equals("Klient"))
     int x = Int32.Parse(Session["LogedUserID"].ToString());
     @Html.ActionLink("Strona główna", "Index", "Home", null, new { @class = "btn btn-block btn-primary btn-lg" })
     @Html.ActionLink("Wypożycz", "List", "Car", null, new { @class = "btn btn-block btn-default btn-lg" })
+    @Html.ActionLink("Wypożycz Busa", "BusList", "Car", null, new { @class = "btn btn-block btn-default btn-lg" })
     @Html.ActionLink("Wypożyczenia", "Index", "Rental", null, new { @class = "btn btn-block btn-default btn-lg" })
     @Html.ActionLink("Edycja Danych", "Edit", "Users", new { userId = x }, new { @class = "btn btn-block btn-default btn-lg" })
 }

@@ -3,7 +3,9 @@
 @{
     ViewBag.Title = "Rejestracja";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
+
  <div>
 
     @using (Html.BeginForm("New", "Users"))
@@ -11,6 +13,7 @@
 
         @Html.ValidationSummary()
         <div class="form-group">
+            @Html.ValidationMessageFor(x => x.Username)
             <label>Nazwa użytkownika:</label><p></p>
             @Html.EditorFor(x => x.Username)
         </div>

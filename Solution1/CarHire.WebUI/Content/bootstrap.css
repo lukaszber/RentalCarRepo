@@ -47,7 +47,9 @@ html {
 }
 
 body {
-  margin: 0;
+  margin:auto;
+  min-width:1000px;
+  width:90%;
 }
 
 a:focus {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,9 @@ namespace CarHire.Domain.Entities
         public string Name { get; set; }
         [Required(ErrorMessage = "Prosze podać nazwisko")]
         public string Surname { get; set; }
-        [Required(ErrorMessage = "Prosze podać imię")]
+        [Required(ErrorMessage = "Prosze podać login")]
+        [StringLength(450)]
+        [Index(IsUnique = true)]
         public string Username { get; set; }
         [Required(ErrorMessage = "Podaj Hasło", AllowEmptyStrings = false)]
         [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
